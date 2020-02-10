@@ -11,7 +11,7 @@ class MyWindow(QMainWindow, form_class):    # MyWindow 클래스 QMainWindow, fo
         self.setupUi(self)                  # ui 파일 화면 출력
 
         self.kiwoom = QAxWidget("KHOPENAPI.KHOpenAPICtrl.1")        # 키움증권 Open API+ ProgID를 사용하여 생성된 AQxWidget 을 kiwoom 변수에 할당
-        self.lineEdit_inputCode.setDisabled(True)
+        self.lineEdit_code.setDisabled(True)
         self.pushButton_search.setDisabled(True)
         self.plainTextEdit_list.setDisabled(True)
 
@@ -26,7 +26,7 @@ class MyWindow(QMainWindow, form_class):    # MyWindow 클래스 QMainWindow, fo
 
     def event_connect(self, error_code):
         if error_code == 0:
-            self.lineEdit_inputCode.setDisabled(False)
+            self.lineEdit_code.setDisabled(False)
             self.pushButton_search.setDisabled(False)
             self.plainTextEdit_list.setDisabled(False)
             self.plainTextEdit_list.appendPlainText("Login Success")
@@ -34,13 +34,13 @@ class MyWindow(QMainWindow, form_class):    # MyWindow 클래스 QMainWindow, fo
             account_info = self.kiwoom.dynamicCall("GetLoginInfo(Qstring)", ["ACCNO"])
             self.plainTextEdit_list.appendPlainText("계좌번호: " + account_info.rstrip(';'))
         else:
-            self.lineEdit_inputCode.setDisabled(True)
+            self.lineEdit_code.setDisabled(True)
             self.pushButton_search.setDisabled(True)
             self.plainTextEdit_list.setDisabled(True)
             self.plainTextEdit_list.appendPlainText("Login Failed")
 
     def button_search(self):
-        code = self.lineEdit_inputCode.text()
+        code = self.lineEdit_code.text()
         self.plainTextEdit_list.appendPlainText("종목코드: " + code)
         self.kiwoom.dynamicCall("SetInputValue(QString, QString)", "종목코드", code)
         self.kiwoom.dynamicCall("CommRqData(QString, QString, int, int, QString", "opt10001_req", "opt10001", 0, "0101")

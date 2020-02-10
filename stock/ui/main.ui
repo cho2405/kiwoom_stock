@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>913</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>주식매매</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
@@ -30,30 +30,30 @@
    <widget class="QPlainTextEdit" name="plainTextEdit_list">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>190</y>
-      <width>371</width>
-      <height>321</height>
+      <x>600</x>
+      <y>100</y>
+      <width>251</width>
+      <height>241</height>
      </rect>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox_input">
+   <widget class="QGroupBox" name="groupBox_setting">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>30</y>
-      <width>371</width>
+      <x>10</x>
+      <y>10</y>
+      <width>301</width>
       <height>151</height>
      </rect>
     </property>
     <property name="title">
-     <string>입력</string>
+     <string>설정</string>
     </property>
     <widget class="QPushButton" name="pushButton_login">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>30</y>
+       <x>40</x>
+       <y>20</y>
        <width>75</width>
        <height>23</height>
       </rect>
@@ -62,11 +62,11 @@
       <string>로그인</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_inputCode">
+    <widget class="QLineEdit" name="lineEdit_code">
      <property name="geometry">
       <rect>
-       <x>130</x>
-       <y>70</y>
+       <x>80</x>
+       <y>120</y>
        <width>113</width>
        <height>20</height>
       </rect>
@@ -78,8 +78,8 @@
     <widget class="QLabel" name="label_code">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>70</y>
+       <x>20</x>
+       <y>120</y>
        <width>56</width>
        <height>12</height>
       </rect>
@@ -91,8 +91,8 @@
     <widget class="QPushButton" name="pushButton_search">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>70</y>
+       <x>210</x>
+       <y>120</y>
        <width>75</width>
        <height>23</height>
       </rect>
@@ -101,10 +101,312 @@
       <string>조회</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_start">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>20</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>거래시작</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_pause">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>50</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>거래중지</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_restart">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>50</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>거래재시작</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_insert">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>90</y>
+       <width>56</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>투입금</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_insert">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>90</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
-   <zorder>groupBox_input</zorder>
+   <widget class="QGroupBox" name="groupBox_account">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>10</y>
+      <width>211</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>계좌정보</string>
+    </property>
+    <widget class="QLabel" name="label_accountNo">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>56</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>계좌번호</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_accountNo">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>20</y>
+       <width>76</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_d2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>56</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>D2예수금</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_d2">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>60</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_trade">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>170</y>
+      <width>531</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>거래</string>
+    </property>
+    <widget class="QLabel" name="label_condition">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>조건검색명</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_condition">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>20</y>
+       <width>151</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_totalInsert">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>60</y>
+       <width>56</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>총투입금</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_totalInsert">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>50</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_profit">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>60</y>
+       <width>56</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>수익금</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_profit">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>50</y>
+       <width>113</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ratio">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>50</y>
+       <width>56</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>수익률</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_ratio">
+     <property name="geometry">
+      <rect>
+       <x>430</x>
+       <y>50</y>
+       <width>81</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_Info">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>280</y>
+      <width>531</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>거래정보</string>
+    </property>
+    <widget class="QLabel" name="label_buy">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>30</y>
+       <width>56</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>매수종목</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_sell">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>30</y>
+       <width>56</width>
+       <height>12</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>매도종목</string>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="plainTextEdit_buyLog">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>70</y>
+       <width>221</width>
+       <height>161</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPlainTextEdit" name="plainTextEdit_sellLog">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>70</y>
+       <width>241</width>
+       <height>161</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_result">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>20</y>
+      <width>301</width>
+      <height>351</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>내역</string>
+    </property>
+   </widget>
+   <zorder>groupBox_setting</zorder>
    <zorder>pushButton</zorder>
    <zorder>plainTextEdit_list</zorder>
+   <zorder>groupBox_account</zorder>
+   <zorder>groupBox_trade</zorder>
+   <zorder>groupBox_Info</zorder>
+   <zorder>groupBox_result</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
