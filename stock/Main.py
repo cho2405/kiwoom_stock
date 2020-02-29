@@ -2,6 +2,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QAxContainer import *
+import time
 
 form_class = uic.loadUiType("ui/main.ui")[0]    # ui 파일을 로드하여 form_class 생성
 
@@ -20,6 +21,52 @@ class MyWindow(QMainWindow, form_class):    # MyWindow 클래스 QMainWindow, fo
 
         self.pushButton_search.clicked.connect(self.button_search)
         self.kiwoom.OnReceiveTrData.connect(self.get_tr_baisc_data)
+
+
+
+    def auto_trading(self):
+        """키움증권 HTS에 등록한 조건검색식에서 검출한 종목을 매수하고
+        -2%, +3%에 손절/익절 매도하는 기본적인 자동매매 함수
+
+        :return:
+        """
+        # callback fn 등록
+        self.kw.notify_fn["_on_receive_real_condition"] = self.search_condi
+
+        screen_no = "4000"
+        condi_info = self.kw.get_condition_load()
+        # {'추천조건식01': '002',
+        #'추천조건식02': '000',
+        #'급등/상승_추세조건': '001',
+        #'Envelop횡단': '003',
+        #'스켈핑': '004'}
+        for condi_name, condi_id in condi_info.items():
+        # 화면번호, 조건식이름, 조건식ID, 실시간조건검색(1)
+            self.kw.send_condition(screen_no, condi_name, int(condi_id), 1)
+        time.sleep(0.2)
+
+    def search_condi(self, event_data):
+        """키움모듈의 OnReceiveRealCondition 이벤트 수신되면 호출되는 callback함수
+        이벤트 정보는 event_data 변수로 전달된다.
+
+            ex)
+            event_data = {
+                "code": code, # "066570"
+                "event_type": event_type, # "I"(종목편입), "D"(종목이탈)
+                "condi_name": condi_name, # "스켈핑"
+                "condi_index": condi_index # "004"
+            }
+        :param dict event_data:
+        :return:
+        """
+        if event_data["event_type"] == "I":
+            if self.stock_account["계좌정보"]["예수금"] < 100000:  # 잔고가 10만원 미만이면 매수 안함
+                return
+            curr_price = self.kw.get_curr_price(event_data["code"])
+            quantity = int(100000 / curr_price)
+            self.kw.reg_callback("OnReceiveChejanData", ("조건식매수", "5000"), self.update_account)
+            self.kw.send_order("조건식매수", "5000", self.acc_no, 1, event_data["code"], quantity, 0, "03", "")
+
 
     def button_login(self):
         ret = self.kiwoom.dynamicCall("CommConnect()")      # 키움 로그인 윈도우를 실행
@@ -51,6 +98,7 @@ class MyWindow(QMainWindow, form_class):    # MyWindow 클래스 QMainWindow, fo
             volume = self.kiwoom.dynamicCall("CommGetData(QString, QString, QString, int, QString)", tr_code, "", rq_name, 0, "거래량")
             self.plainTextEdit_list.appendPlainText("종목명: " + name.strip())
             self.plainTextEdit_list.appendPlainText("거래량: " + volume.strip())
+
 
 
 if __name__ == "__main__":

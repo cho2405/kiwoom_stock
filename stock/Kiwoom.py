@@ -22,7 +22,46 @@ class Kiwoom(QAxWidget):
         self.OnEventConnect.connect(self._event_connect)
         self.OnReceiveTrData.connect(self._receive_tr_data)
         self.OnReceiveChejanData.connect(self._receive_chejan_data)
+        self.OnReceiveTrData.connect(self.tr_mgr._on_receive_tr_data)  # tr 수신 이벤트
+        self.OnReceiveRealData.connect(self._on_receive_real_data)  # 실시간 시세 이벤트
+        self.OnReceiveRealCondition.connect(self._on_receive_real_condition)  # 조건검색 실시간 편입, 이탈종목 이벤트
 
+    def _on_receive_real_condition(self, code, event_type, condi_name, condi_index):
+        """
+        Kiwoom Receive Realtime Condition Result(stock list) Callback, 조건검색 실시간 편입, 이탈 종목을 받을 시점을 알려준다.
+        condi_name(조건식)으로 부터 검출된 종목이 실시간으로 들어옴.
+        update_type으로 편입된 종목인지, 이탈된 종목인지 구분한다.
+        * 조건식 검증할때, 어떤 종목이 검출된 시간을 본 함수내에서 구현해야 함
+        :param code str: 종목코드
+        :param event_type str: 편입("I"), 이탈("D")
+        :param condi_name str: 조건식명
+        :param condi_index str: 조건식명 인덱스
+        :return: 없음
+        """
+        try:
+            self.logger.info("_on_receive_real_condition")
+            max_char_cnt = 60
+            self.logger.info("[실시간 조건 검색 결과]".center(max_char_cnt, '-'))
+            data = [
+                ("code", code),
+                ("event_type", event_type),
+                ("condi_name", condi_name),
+                ("condi_index", condi_index)
+            ]
+            max_key_cnt = max(len(d[0]) for d in data) + 3
+            for d in data:
+                key = ("* " + d[0]).rjust(max_key_cnt)
+                self.logger.info("{0}: {1}".format(key, d[1]))
+            self.logger.info("-" * max_char_cnt)
+            data = dict(data)
+            data["kw_event"] = "OnReceiveRealCondition"
+            if '_on_receive_real_condition' in self.notify_fn:
+                self.notify_fn['_on_receive_real_condition'](data)
+
+        except Exception as e:
+            self.logger.error(e)
+        finally:
+            self.real_condition_search_result = []
     def comm_connect(self):
         self.dynamicCall("CommConnect()")
         self.login_event_loop = QEventLoop()
